@@ -2789,7 +2789,7 @@ function resolveShot(kind, bonus=0){
     addMeter(s,7); addMeter(d,7);
     adjustBrazilMood(s,-1);
     showCinematic([{
-      img: missArt(s),
+      img: ASSETS.crossbarCloseCall || missArt(s),
       title:'Off the Crossbar!',
       text:`Close call!
 ${ot.name} smash the ball against the crossbar, but it stays out.`,

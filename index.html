@@ -1164,8 +1164,8 @@ html,body{min-height:100%;height:auto;overflow:auto;}
 
 /* MOBILE FIT PASS v1 - gameplay popups smaller + tutorial no-scroll */
 @media (max-width:700px) and (orientation:portrait){
-  html,body{height:100dvh!important;overflow:hidden!important;}
-  #app{height:100dvh!important;overflow:hidden!important;}
+  html,body{min-height:100dvh!important;overflow:auto!important;}
+  #app{min-height:100dvh!important;overflow:visible!important;}
 
   /* Cinematics: stop using the whole phone screen as a giant cropped poster. */
   .overlay{position:fixed!important;inset:0!important;padding:0!important;overflow:hidden!important;}
@@ -1257,8 +1257,8 @@ html,body{min-height:100%;height:auto;overflow:auto;}
 }
 
 @media (max-height:520px) and (orientation:landscape){
-  html,body{height:100dvh!important;overflow:hidden!important;}
-  #app{height:100dvh!important;overflow:hidden!important;padding:0!important;}
+  html,body{min-height:100dvh!important;overflow:auto!important;}
+  #app{min-height:100dvh!important;overflow:visible!important;padding:0!important;}
 
   /* Landscape cinematics: image left, text right, no scroll. */
   .overlay{position:fixed!important;inset:0!important;padding:0!important;overflow:hidden!important;}
@@ -1310,6 +1310,253 @@ html,body{min-height:100%;height:auto;overflow:auto;}
   .tutorialDemo > .tutorialBottom .btn{min-height:30px!important;padding:3px 6px!important;font-size:10px!important;}
 }
 
+
+
+/* FINAL MOBILE MENU + TUTORIAL POPUP PATCH */
+@media (max-width:700px) and (orientation:portrait){
+  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
+
+  /* Portrait splash/home: show the whole 3-player Clash Cup art instead of a giant crop. */
+  .splashScreen .startLogoImg,
+  .homeScreen .startLogoImg{object-fit:contain!important;object-position:center top!important;background:#020814!important;}
+  .splashScreen .startShade,
+  .homeScreen .startShade{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.12) 55%,rgba(0,0,0,.62))!important;}
+  .splashScreen .splashTap{left:8px!important;right:8px!important;bottom:max(4px,env(safe-area-inset-bottom))!important;width:auto!important;min-width:0!important;font-size:11px!important;padding:8px 10px!important;border-radius:16px!important;}
+
+  /* Campaign select: all three teams visible at once in portrait. */
+  .campaignSelectScreen{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
+  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:38px!important;padding:6px 8px!important;}
+  .campaignSelectScreen .title{font-size:17px!important;letter-spacing:.08em!important;}
+  .campaignSelectScreen .subtitle{font-size:9px!important;line-height:1.05!important;}
+  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:6px!important;display:flex!important;flex-direction:column!important;gap:5px!important;}
+  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:repeat(3,1fr)!important;gap:5px!important;flex:1 1 auto!important;min-height:0!important;}
+  .campaignSelectScreen .campaignCard{min-height:0!important;display:grid!important;grid-template-columns:86px minmax(0,1fr)!important;grid-template-rows:auto 1fr auto!important;grid-template-areas:"img title" "img meta" "img btn"!important;gap:3px 8px!important;padding:6px!important;border-radius:12px!important;overflow:hidden!important;}
+  .campaignSelectScreen .starThumb{grid-area:img!important;width:86px!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;border-radius:10px!important;background-size:cover!important;background-position:center top!important;}
+  .campaignSelectScreen .campaignTitle{grid-area:title!important;font-size:18px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .campaignSelectScreen .campaignMeta{grid-area:meta!important;font-size:11px!important;line-height:1.15!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .campaignSelectScreen .campaignCard .btn{grid-area:btn!important;min-height:30px!important;padding:4px 6px!important;font-size:11px!important;border-radius:8px!important;box-shadow:0 3px 0 #9a6b07!important;}
+  .campaignSelectScreen .footerBtns{flex:0 0 auto!important;margin:3px 0 0!important;}
+  .campaignSelectScreen .footerBtns .btn{min-height:28px!important;padding:4px 8px!important;font-size:10px!important;}
+
+  /* Tutorial: reactions are now popups, so keep the main layout compact and hide old inline result space. */
+  .tutorialResult{display:none!important;}
+}
+
+@media (max-height:520px) and (orientation:landscape){
+  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
+
+  /* Campaign select: all three teams visible at once in landscape. */
+  .campaignSelectScreen{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
+  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:30px!important;padding:4px 8px!important;}
+  .campaignSelectScreen .title{font-size:16px!important;}
+  .campaignSelectScreen .subtitle{font-size:9px!important;line-height:1!important;}
+  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:5px!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
+  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:5px!important;flex:1 1 auto!important;min-height:0!important;}
+  .campaignSelectScreen .campaignCard{display:flex!important;flex-direction:column!important;gap:3px!important;padding:5px!important;border-radius:10px!important;overflow:hidden!important;min-height:0!important;}
+  .campaignSelectScreen .starThumb{height:clamp(76px,35dvh,112px)!important;aspect-ratio:auto!important;margin:0!important;border-radius:8px!important;background-size:cover!important;background-position:center 18%!important;flex:0 0 auto!important;}
+  .campaignSelectScreen .campaignTitle{font-size:15px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .campaignSelectScreen .campaignMeta{font-size:9px!important;line-height:1.08!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .campaignSelectScreen .campaignCard .btn{min-height:27px!important;padding:3px 5px!important;font-size:9px!important;border-radius:7px!important;box-shadow:0 2px 0 #9a6b07!important;}
+  .campaignSelectScreen .footerBtns{margin:2px 0 0!important;}
+  .campaignSelectScreen .footerBtns .btn{min-height:24px!important;padding:3px 8px!important;font-size:9px!important;}
+  .tutorialResult{display:none!important;}
+}
+
+
+
+/* ULTIMATE MOBILE DONE PATCH */
+@media (max-width:900px){
+  .tutorialDemo .miniLegend{display:none!important;}
+  .tutorialResult{display:none!important;}
+  .tutorialPrompt .cineCard{width:min(96vw,960px)!important;max-height:min(94vh,760px)!important;overflow:auto!important;}
+  .tutorialIntroGrid{
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    grid-template-areas:
+      "center center"
+      "pt ar"!important;
+    gap:10px!important;
+    align-items:stretch!important;
+    margin:10px 0!important;
+  }
+  .tutorialIntroCenter{grid-area:center!important;padding:12px!important;gap:10px!important;}
+  .tutorialIntroCenter .btn{min-height:42px!important;}
+  .tutorialIntroCaptain:first-child{grid-area:pt!important;}
+  .tutorialIntroCaptain:last-child{grid-area:ar!important;}
+  .tutorialIntroCaptain{min-height:160px!important;height:clamp(160px,26vh,220px)!important;background-size:cover!important;background-position:center 18%!important;border-radius:16px!important;}
+  .tutorialIntroCaptainLabel{font-size:12px!important;padding:6px!important;}
+  .tutorialIntroCenter .tutorialText{font-size:clamp(15px,2.2vw,20px)!important;line-height:1.22!important;}
+}
+
+@media (max-width:700px) and (orientation:portrait){
+  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
+
+  /* Portrait splash and home: show the full 3-player poster instead of a giant crop. */
+  .splashScreen,
+  .homeScreen{
+    width:100vw!important;
+    min-height:100dvh!important;
+    border:0!important;
+    border-radius:0!important;
+    overflow:hidden!important;
+  }
+  .splashScreen .startLogoImg,
+  .homeScreen .startLogoImg{
+    inset:max(8px,env(safe-area-inset-top)) 0 64px 0!important;
+    width:100%!important;
+    height:calc(100dvh - 72px)!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    background:#020814!important;
+  }
+  .splashScreen .startShade,
+  .homeScreen .startShade{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08) 52%,rgba(0,0,0,.52))!important;}
+  .splashScreen .splashTap{
+    left:8px!important;right:8px!important;bottom:max(5px,env(safe-area-inset-bottom))!important;
+    transform:none!important;width:auto!important;min-width:0!important;padding:10px 12px!important;font-size:11px!important;line-height:1.1!important;border-radius:16px!important;
+  }
+  .homeButtonBar{
+    left:10px!important;right:10px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;
+    transform:none!important;width:auto!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px!important;border-radius:16px!important;
+  }
+  .homeButtonBar .btn{min-height:42px!important;font-size:13px!important;}
+  .homeMiniHint{font-size:10px!important;bottom:max(58px,env(safe-area-inset-bottom))!important;display:block!important;}
+
+  /* Campaign team choose: all three teams visible in one portrait screen. */
+  .campaignSelectScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
+  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:36px!important;padding:max(4px,env(safe-area-inset-top)) 8px 4px!important;}
+  .campaignSelectScreen .title{font-size:16px!important;}
+  .campaignSelectScreen .subtitle{font-size:9px!important;line-height:1.05!important;}
+  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:auto!important;padding:6px!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
+  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:5px!important;flex:1 1 auto!important;min-height:0!important;}
+  .campaignSelectScreen .campaignCard{height:100%!important;max-height:calc((100dvh - 118px)/3)!important;min-height:0!important;display:grid!important;grid-template-columns:74px minmax(0,1fr)!important;grid-template-rows:auto 1fr auto!important;grid-template-areas:"img title" "img meta" "img btn"!important;gap:2px 7px!important;padding:5px!important;border-radius:12px!important;overflow:hidden!important;}
+  .campaignSelectScreen .starThumb{grid-area:img!important;width:74px!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;border-radius:10px!important;background-size:cover!important;background-position:center 18%!important;}
+  .campaignSelectScreen .campaignTitle{grid-area:title!important;font-size:16px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .campaignSelectScreen .campaignMeta{grid-area:meta!important;font-size:10px!important;line-height:1.12!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .campaignSelectScreen .campaignCard .btn{grid-area:btn!important;min-height:24px!important;padding:3px 5px!important;font-size:10px!important;border-radius:7px!important;box-shadow:0 2px 0 #9a6b07!important;}
+  .campaignSelectScreen .footerBtns{flex:0 0 auto!important;margin:2px 0 0!important;}
+  .campaignSelectScreen .footerBtns .btn{min-height:24px!important;padding:3px 8px!important;font-size:9px!important;}
+
+  /* Tutorial intro on portrait: center box first, then both captains side by side. */
+  .tutorialPrompt .cineCard{width:min(96vw,720px)!important;max-height:94vh!important;padding:12px!important;}
+  .tutorialIntroCaptain{height:140px!important;min-height:140px!important;}
+
+  /* Tutorial gameplay: hide the long legend under the field and keep next visible. */
+  .tutorialScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;}
+  .tutorialScreen .topbar{flex:0 0 auto!important;padding:max(4px,env(safe-area-inset-top)) 8px 4px!important;min-height:32px!important;}
+  .tutorialScreen .title{font-size:13px!important;letter-spacing:.04em!important;}
+  .tutorialScreen .subtitle{font-size:8px!important;line-height:1.05!important;max-width:48vw!important;overflow:hidden!important;}
+  .tutorialScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:4px!important;}
+  .tutorialLayout{height:100%!important;display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;grid-template-columns:1fr!important;gap:4px!important;overflow:hidden!important;}
+  .tutorialCoach{min-height:0!important;padding:5px!important;display:block!important;overflow:hidden!important;border-radius:10px!important;}
+  .tutorialCoach > div:first-child{display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;grid-template-areas:"portrait name" "portrait title" "portrait text" "speech speech"!important;column-gap:8px!important;row-gap:2px!important;align-items:start!important;}
+  .tutorialCoach .tutorialPortrait{grid-area:portrait!important;height:80px!important;width:72px!important;aspect-ratio:auto!important;margin:0!important;border-radius:10px!important;border-width:2px!important;display:block!important;}
+  .tutorialCoach .tutorialName{grid-area:name!important;order:0!important;font-size:8px!important;line-height:1!important;margin:0!important;}
+  .tutorialCoach .tutorialTitle{grid-area:title!important;order:0!important;font-size:15px!important;line-height:1!important;margin:0!important;}
+  .tutorialCoach .tutorialText{grid-area:text!important;font-size:12px!important;line-height:1.12!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;margin:0!important;}
+  .tutorialSpeechBox{grid-area:speech!important;margin-top:4px!important;padding:6px 8px!important;font-size:11px!important;line-height:1.15!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .tutorialCoach .tutorialStepNote,.tutorialCoach > .tutorialBottom{display:none!important;}
+  .tutorialDemo{min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
+  .tutorialDemo .scoreCard{flex:0 0 auto!important;padding:4px!important;border-radius:9px!important;}
+  .tutorialDemo .playPanel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4px!important;margin:0 0 3px!important;}
+  .tutorialDemo .playBox{padding:3px 5px!important;border-radius:7px!important;}
+  .tutorialDemo .playLabel{font-size:7px!important;margin:0!important;}
+  .tutorialDemo .playText{font-size:10px!important;line-height:1.05!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .tutorialDemo .field{height:106px!important;min-height:0!important;border-width:2px!important;}
+  .tutorialDemo .miniLegend{display:none!important;}
+  .tutorialDemo .matchStatusStrip{font-size:7px!important;gap:2px!important;padding:0!important;line-height:1!important;}
+  .tutorialDemo .zone{height:12px!important;font-size:6px!important;padding:0!important;border-radius:4px!important;}
+  .tutorialMockControls{flex:0 0 auto!important;padding:4px!important;border-radius:9px!important;}
+  .tutorialMockControls .row{gap:4px!important;}
+  .tutorialMockControls .row b{font-size:10px!important;line-height:1!important;}
+  .tutorialMockControls .pill,.tutorialLockedHint{font-size:7px!important;padding:1px 4px!important;margin:0!important;}
+  .tutorialMockControls p.small,.tutorialDemo .logDetails{display:none!important;}
+  .tutorialMockControls .choiceGrid,.tutorialMockControls .penGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{gap:4px!important;}
+  .tutorialMockControls .choiceGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{grid-template-columns:repeat(3,1fr)!important;}
+  .tutorialMockControls .btn{min-height:30px!important;padding:4px 5px!important;font-size:9px!important;border-radius:7px!important;box-shadow:0 3px 0 #082b50!important;}
+  .tutorialMockControls .moveName{font-size:10px!important;}
+  .tutorialMockControls .moveDesc{display:none!important;}
+  .tutorialDemo > .tutorialBottom{flex:0 0 auto!important;margin:0!important;gap:4px!important;display:flex!important;position:relative!important;z-index:2!important;background:#020814!important;padding-top:2px!important;}
+  .tutorialDemo > .tutorialBottom .btn{min-height:30px!important;padding:4px 6px!important;font-size:10px!important;border-radius:8px!important;}
+}
+
+@media (max-height:520px) and (orientation:landscape){
+  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
+  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
+
+  /* Landscape splash/home: show whole poster with a compact tap bar. */
+  .splashScreen,
+  .homeScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;overflow:hidden!important;}
+  .splashScreen .startLogoImg,
+  .homeScreen .startLogoImg{inset:max(4px,env(safe-area-inset-top)) 0 46px 0!important;width:100%!important;height:calc(100dvh - 52px)!important;object-fit:contain!important;object-position:center center!important;background:#020814!important;}
+  .splashScreen .startShade,
+  .homeScreen .startShade{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08) 55%,rgba(0,0,0,.45))!important;}
+  .splashScreen .splashTap{left:15%!important;right:15%!important;bottom:4px!important;transform:none!important;width:auto!important;min-width:0!important;padding:7px 10px!important;font-size:10px!important;border-radius:14px!important;}
+  .homeButtonBar{left:50%!important;right:auto!important;transform:translateX(-50%)!important;bottom:5px!important;width:min(520px,90vw)!important;grid-template-columns:1fr 1fr!important;gap:6px!important;padding:6px!important;border-radius:14px!important;}
+  .homeButtonBar .btn{min-height:32px!important;font-size:11px!important;}
+  .homeMiniHint{display:none!important;}
+
+  /* Landscape tutorial prompt: center panel on top, captains below, no cropped strips. */
+  .tutorialPrompt .cineCard{width:min(96vw,960px)!important;max-height:95vh!important;overflow:auto!important;padding:10px!important;}
+  .tutorialIntroGrid{grid-template-columns:1fr 1fr!important;grid-template-areas:"center center" "pt ar"!important;gap:8px!important;}
+  .tutorialIntroCenter{padding:10px!important;gap:8px!important;}
+  .tutorialIntroCaptain{height:118px!important;min-height:118px!important;background-position:center 18%!important;}
+  .tutorialIntroCaptainLabel{font-size:11px!important;padding:5px!important;}
+  .tutorialIntroCenter .tutorialText{font-size:12px!important;line-height:1.2!important;}
+  .tutorialIntroCenter .btn{min-height:34px!important;font-size:11px!important;}
+
+  /* Campaign team choose: all three visible in one landscape view. */
+  .campaignSelectScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
+  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:28px!important;padding:max(3px,env(safe-area-inset-top)) 8px 3px!important;}
+  .campaignSelectScreen .title{font-size:14px!important;}
+  .campaignSelectScreen .subtitle{font-size:8px!important;line-height:1!important;}
+  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:auto!important;padding:4px!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
+  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px!important;flex:1 1 auto!important;min-height:0!important;}
+  .campaignSelectScreen .campaignCard{display:flex!important;flex-direction:column!important;gap:3px!important;padding:5px!important;border-radius:10px!important;overflow:hidden!important;min-height:0!important;}
+  .campaignSelectScreen .starThumb{height:84px!important;aspect-ratio:auto!important;margin:0!important;border-radius:8px!important;background-size:cover!important;background-position:center 18%!important;flex:0 0 auto!important;}
+  .campaignSelectScreen .campaignTitle{font-size:13px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .campaignSelectScreen .campaignMeta{font-size:8px!important;line-height:1.08!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .campaignSelectScreen .campaignCard .btn{min-height:24px!important;padding:3px 5px!important;font-size:8px!important;border-radius:7px!important;box-shadow:0 2px 0 #9a6b07!important;}
+  .campaignSelectScreen .footerBtns{margin:1px 0 0!important;}
+  .campaignSelectScreen .footerBtns .btn{min-height:22px!important;padding:3px 8px!important;font-size:8px!important;}
+
+  /* Tutorial gameplay in landscape: compact coach column + field/actions visible together. */
+  .tutorialScreen{width:100vw!important;height:100dvh!important;min-height:100dvh!important;border:0!important;border-radius:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;}
+  .tutorialScreen .topbar{flex:0 0 auto!important;min-height:28px!important;padding:max(3px,env(safe-area-inset-top)) 7px 3px!important;}
+  .tutorialScreen .title{font-size:12px!important;}
+  .tutorialScreen .subtitle{font-size:8px!important;line-height:1!important;}
+  .tutorialScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:4px!important;}
+  .tutorialLayout{height:100%!important;display:grid!important;grid-template-columns:32vw minmax(0,1fr)!important;gap:4px!important;overflow:hidden!important;}
+  .tutorialCoach{min-height:0!important;padding:5px!important;overflow:hidden!important;border-radius:10px!important;}
+  .tutorialCoach > div:first-child{display:grid!important;grid-template-columns:58px minmax(0,1fr)!important;grid-template-areas:"portrait name" "portrait title" "text text" "speech speech"!important;column-gap:7px!important;row-gap:2px!important;align-items:start!important;}
+  .tutorialCoach .tutorialPortrait{grid-area:portrait!important;height:62px!important;width:58px!important;aspect-ratio:auto!important;margin:0!important;border-radius:8px!important;border-width:2px!important;display:block!important;}
+  .tutorialName{font-size:8px!important;line-height:1!important;}
+  .tutorialTitle{font-size:13px!important;line-height:1!important;margin:0 0 2px!important;}
+  .tutorialText{grid-area:text!important;font-size:10px!important;line-height:1.12!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .tutorialSpeechBox{grid-area:speech!important;margin-top:3px!important;padding:4px 6px!important;font-size:9px!important;line-height:1.08!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .tutorialCoach .tutorialStepNote,.tutorialCoach > .tutorialBottom{display:none!important;}
+  .tutorialDemo{min-height:0!important;overflow:hidden!important;gap:4px!important;display:flex!important;flex-direction:column!important;}
+  .tutorialDemo .scoreCard{padding:4px!important;border-radius:9px!important;}
+  .tutorialDemo .playPanel{grid-template-columns:1fr 1fr!important;gap:4px!important;margin-bottom:3px!important;}
+  .tutorialDemo .playBox{padding:3px 5px!important;}
+  .tutorialDemo .playLabel{font-size:7px!important;}
+  .tutorialDemo .playText{font-size:9px!important;line-height:1.05!important;-webkit-line-clamp:2!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .tutorialDemo .field{height:84px!important;min-height:0!important;}
+  .tutorialDemo .miniLegend{display:none!important;}
+  .tutorialDemo .matchStatusStrip{font-size:7px!important;}
+  .tutorialDemo .compactZones{display:flex!important;}
+  .tutorialMockControls{padding:4px!important;border-radius:9px!important;}
+  .tutorialMockControls p.small,.tutorialMockControls .moveDesc,.tutorialDemo .logDetails{display:none!important;}
+  .tutorialMockControls .choiceGrid,.tutorialMockControls .penGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{grid-template-columns:repeat(3,1fr)!important;gap:4px!important;}
+  .tutorialMockControls .btn{min-height:28px!important;font-size:9px!important;padding:3px 5px!important;border-radius:7px!important;}
+  .tutorialMockControls .moveName{font-size:9px!important;}
+  .tutorialDemo > .tutorialBottom{margin:0!important;gap:4px!important;display:flex!important;background:#020814!important;padding-top:2px!important;}
+  .tutorialDemo > .tutorialBottom .btn{min-height:26px!important;padding:3px 6px!important;font-size:9px!important;}
+}
+
 </style>
 </head>
 <body><div id="app"></div>
@@ -1321,7 +1568,6 @@ const ASSETS = {
   "commentatorStart": "assets/commentatorHalftime.png",
   "bigSave": "assets/bigSave.png",
   "keeperGoalKick": "assets/keeperGoalKick.png",
-    "crossbarCloseCall": "assets/crossbarCloseCall.png",
   "tutorialGuidePt": "assets/tutorialGuidePt.png",
   "tutorialGuideAr": "assets/tutorialGuideAr.png",
   "tutorialGuideBra": "assets/tutorialGuideBra.png",
@@ -2119,38 +2365,53 @@ function tutorialFocusHint(focus){
     ready:'You know enough to play. Go win the cup!'
   })[focus] || 'Follow the highlighted area.';
 }
-function tutorialButtonResult(html){ return html ? `<div class="tutorialResult">${html}</div>` : ''; }
+function tutorialButtonResult(html){ return ''; }
+function showTutorialReaction(message){
+  const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
+  const guide = step.guide || 'P';
+  showCinematic([{
+    img: tutorialCoachImg(guide),
+    title: tutorialCoachName(guide),
+    text: message + '\n\nTap to continue.',
+    sound:'click',
+    vertical:true
+  }], ()=>{ tutorialNext(); });
+}
 function tutorialUseNextPlay(){
   const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
   if(step.required && step.required!=='next') return;
   state.playLast='You tapped Next Play.';
   state.playNow='The match advances until a real attacking choice appears.';
-  state.tutorialResult='Good. In Campaign Mode, Watch Match skips quiet buildup and stops when there is a real decision.';
+  const msg='Good. In Campaign Mode, Watch Match skips quiet buildup and stops when there is a real decision.';
+  state.tutorialResult='';
   state.tutorialStepDone=true;
   state.log.push('<b>Practice:</b> Next Play advanced the match.');
-  render();
+  showTutorialReaction(msg);
 }
 function tutorialChooseAction(choice){
   const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
   if(step.required && step.required!==choice) return;
   if(choice==='pass'){
-    state.tutorialResult='Good. Pass / Cross builds a better chance before shooting.';
+    var msg='Good. Pass / Cross builds a better chance before shooting.';
+    state.tutorialResult='';
     state.playLast=`${sideName(state.possession)} used Pass / Cross to create space.`;
     state.playNow='The next chance should be stronger.';
     state.log.push('<b>Practice:</b> Pass / Cross improved the attack.');
   } else if(choice==='shot'){
-    state.tutorialResult='Good. Take Shot is the fastest way to try for goal. It can score, miss, be saved, hit the bar, or create a corner.';
+    var msg='Good. Take Shot is the fastest way to try for goal. It can score, miss, be saved, hit the bar, or create a corner.';
+    state.tutorialResult='';
     state.playLast=`${sideName(state.possession)} took a shot.`;
     state.playNow='A shot is the fastest way to try for goal.';
     state.log.push('<b>Practice:</b> Shot attempt created a goal chance.');
   } else {
-    state.tutorialResult='Good. Captain Special is the biggest attack. Once a Legend Special is unlocked, it is a guaranteed goal only from the Danger Zone.';
+    var msg='Good. Captain Special is the biggest attack. Once a Legend Special is unlocked, it is a guaranteed goal only from the Danger Zone.';
+    state.tutorialResult='';
     state.playLast=`${sideName(state.possession)} captain stepped up for the special.`;
     state.playNow='The crowd rises for the captain.';
     state.log.push('<b>Practice:</b> Captain Special used.');
   }
   state.tutorialStepDone=true;
-  render();
+  showTutorialReaction(msg);
 }
 function tutorialChooseDefense(choice){
   const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
@@ -2162,21 +2423,22 @@ function tutorialChooseDefense(choice){
       : 'Good. Hard Tackle can stop danger, but it carries the highest yellow-card risk.';
   state.playLast='You chose a defensive response.';
   state.playNow='The captain explains how defense works.';
-  state.tutorialResult=msg;
+  state.tutorialResult='';
   state.tutorialStepDone=true;
   state.log.push('<b>Practice:</b> Defensive choices help you interact when the opponent attacks.');
-  render();
+  showTutorialReaction(msg);
 }
 function tutorialPenaltyChoice(dir){
   const step = TUTORIAL_STEPS[state.tutorialStep||0] || {};
   if(step.required && step.required!==dir) return;
   const label = dir.charAt(0).toUpperCase()+dir.slice(1);
-  state.tutorialResult=`Good. You chose ${label}. If the keeper guesses wrong, it is very likely a goal. If the keeper guesses right, the keeper has a better chance.`;
+  const msg=`Good. You chose ${label}. If the keeper guesses wrong, it is very likely a goal. If the keeper guesses right, the keeper has a better chance.`;
+  state.tutorialResult='';
   state.playLast=`Penalty practice: shooter chose ${label}.`;
   state.playNow='In Faceoff, pass the phone so the goalkeeper can guess.';
   state.tutorialStepDone=true;
   state.log.push(`<b>Practice:</b> Penalty aimed ${label}.`);
-  render();
+  showTutorialReaction(msg);
 }
 function tutorialFloatingCoach(step, guide){
   const focus=step.focus || 'field';
@@ -2228,7 +2490,7 @@ function renderCampaignTeams(){
     const choiceArt = id==='portugal' ? (ASSETS.tutorialGuidePt || t.star) : id==='argentina' ? (ASSETS.tutorialGuideAr || t.star) : id==='brazil' ? (ASSETS.tutorialGuideBra || t.star) : t.star;
     return `<div class="campaignCard ${locked?'locked':''}"><div class="starThumb" style="background-image:url('${choiceArt}')"></div><div class="campaignTitle">${t.flag} ${t.name}</div><div class="campaignMeta">${t.style}<br>${locked?'Locked: win Campaign Mode with Portugal or Argentina to unlock Brazil.':`Experience: ${stars}<br>Legend Special: ${legendMove}${veteranLine}`}</div><button class="btn ${locked?'gray':'gold'}" onclick="selectCampaignTeam('${id}')">${locked?'Locked':'Choose '+t.name}</button></div>`;
   };
-  return `<div class="screen"><div class="topbar"><div class="title">Campaign Mode</div><div class="subtitle">Choose Your Team</div></div><div class="content"><div class="campaignGrid">${card('portugal')}${card('argentina')}${card('brazil',!unlocked)}</div><div class="footerBtns"><button class="btn gray" onclick="state.mode='menu';render()">Back</button></div></div></div>`;
+  return `<div class="screen campaignSelectScreen"><div class="topbar"><div class="title">Campaign Mode</div><div class="subtitle">Choose Your Team</div></div><div class="content"><div class="campaignGrid">${card('portugal')}${card('argentina')}${card('brazil',!unlocked)}</div><div class="footerBtns"><button class="btn gray" onclick="state.mode='menu';render()">Back</button></div></div></div>`;
 }
 function selectCampaignTeam(id){
   if(id==='brazil' && !isBrazilUnlocked()){
@@ -2951,7 +3213,7 @@ function resolveShot(kind, bonus=0){
     addMeter(s,7); addMeter(d,7);
     adjustBrazilMood(s,-1);
     showCinematic([{
-      img: ASSETS.crossbarCloseCall || missArt(s),
+      img: missArt(s),
       title:'Off the Crossbar!',
       text:`Close call!
 ${ot.name} smash the ball against the crossbar, but it stays out.`,
@@ -2984,7 +3246,7 @@ ${ot.name} smash the ball against the crossbar, but it stays out.`,
       {img: specialArt(s), title: `${ot.name} Captain Special`, text: legendMove ? `${ot.special}!\nThe guaranteed legend finish is unleashed.` : `${ot.special}!\nThe captain unloads the signature move.`, sound:'special'},
       success
         ? {img: goalArt(s), title: 'GOOOAL!', text: legendMove ? `${ot.special} is unstoppable!\n${ot.name} turn legend into a goal!` : `${ot.special} breaks through!\n${ot.name} take the moment!`, sound:'goal'}
-        : {img: missArt(s), title: 'Denied!' , text: `${ot.special} looked dangerous...\nbut the keeper or defense survives it.`, sound:'miss'}
+        : {img: missArt(s), title: 'Denied!', text: `${ot.special} looked dangerous...\nbut the keeper or defense survives it.`, sound:'miss'}
     ], ()=>{
       if(success){ goalResult(); resetAfterGoal(d); setAnim('kickoff', before, `${dt.name} restart`, ballPosFor(d,'player',2)); }
       else {

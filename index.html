@@ -1366,195 +1366,184 @@ html,body{min-height:100%;height:auto;overflow:auto;}
 
 
 
-/* ULTIMATE MOBILE DONE PATCH */
-@media (max-width:900px){
-  .tutorialDemo .miniLegend{display:none!important;}
-  .tutorialResult{display:none!important;}
-  .tutorialPrompt .cineCard{width:min(96vw,960px)!important;max-height:min(94vh,760px)!important;overflow:auto!important;}
-  .tutorialIntroGrid{
-    display:grid!important;
-    grid-template-columns:1fr 1fr!important;
-    grid-template-areas:
-      "center center"
-      "pt ar"!important;
-    gap:10px!important;
-    align-items:stretch!important;
-    margin:10px 0!important;
-  }
-  .tutorialIntroCenter{grid-area:center!important;padding:12px!important;gap:10px!important;}
-  .tutorialIntroCenter .btn{min-height:42px!important;}
-  .tutorialIntroCaptain:first-child{grid-area:pt!important;}
-  .tutorialIntroCaptain:last-child{grid-area:ar!important;}
-  .tutorialIntroCaptain{min-height:160px!important;height:clamp(160px,26vh,220px)!important;background-size:cover!important;background-position:center 18%!important;border-radius:16px!important;}
-  .tutorialIntroCaptainLabel{font-size:12px!important;padding:6px!important;}
-  .tutorialIntroCenter .tutorialText{font-size:clamp(15px,2.2vw,20px)!important;line-height:1.22!important;}
-}
+/* SAFE RESCUE PATCH - restores loading and only fixes the worst mobile blockers */
 
+/* Do not let the page get trapped on mobile. */
 @media (max-width:700px) and (orientation:portrait){
-  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
-  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
-
-  /* Portrait splash and home: show the full 3-player poster instead of a giant crop. */
-  .splashScreen,
-  .homeScreen{
-    width:100vw!important;
+  html, body {
+    height:auto!important;
     min-height:100dvh!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  #app {
+    height:auto!important;
+    min-height:100dvh!important;
+    overflow:visible!important;
+  }
+
+  /* Campaign select must be playable: allow scroll and make cards smaller. */
+  .campaignSelectScreen {
+    height:auto!important;
+    min-height:100dvh!important;
+    overflow:visible!important;
     border:0!important;
     border-radius:0!important;
+  }
+  .campaignSelectScreen .content {
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    padding:6px!important;
+    max-height:none!important;
+  }
+  .campaignSelectScreen .campaignGrid {
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:none!important;
+    gap:8px!important;
+    height:auto!important;
+    min-height:0!important;
+  }
+  .campaignSelectScreen .campaignCard {
+    display:grid!important;
+    grid-template-columns:88px minmax(0,1fr)!important;
+    grid-template-areas:
+      "img title"
+      "img meta"
+      "img btn"!important;
+    gap:3px 8px!important;
+    padding:7px!important;
+    min-height:116px!important;
+    max-height:none!important;
     overflow:hidden!important;
   }
-  .splashScreen .startLogoImg,
-  .homeScreen .startLogoImg{
-    inset:max(8px,env(safe-area-inset-top)) 0 64px 0!important;
-    width:100%!important;
-    height:calc(100dvh - 72px)!important;
-    object-fit:contain!important;
-    object-position:center center!important;
-    background:#020814!important;
+  .campaignSelectScreen .starThumb {
+    grid-area:img!important;
+    width:88px!important;
+    height:100%!important;
+    min-height:102px!important;
+    aspect-ratio:auto!important;
+    margin:0!important;
+    background-size:cover!important;
+    background-position:center 18%!important;
   }
-  .splashScreen .startShade,
-  .homeScreen .startShade{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08) 52%,rgba(0,0,0,.52))!important;}
-  .splashScreen .splashTap{
-    left:8px!important;right:8px!important;bottom:max(5px,env(safe-area-inset-bottom))!important;
-    transform:none!important;width:auto!important;min-width:0!important;padding:10px 12px!important;font-size:11px!important;line-height:1.1!important;border-radius:16px!important;
+  .campaignSelectScreen .campaignTitle {
+    grid-area:title!important;
+    font-size:17px!important;
+    line-height:1!important;
+    margin:0!important;
   }
-  .homeButtonBar{
-    left:10px!important;right:10px!important;bottom:max(8px,env(safe-area-inset-bottom))!important;
-    transform:none!important;width:auto!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px!important;border-radius:16px!important;
+  .campaignSelectScreen .campaignMeta {
+    grid-area:meta!important;
+    font-size:10px!important;
+    line-height:1.1!important;
+    margin:0!important;
   }
-  .homeButtonBar .btn{min-height:42px!important;font-size:13px!important;}
-  .homeMiniHint{font-size:10px!important;bottom:max(58px,env(safe-area-inset-bottom))!important;display:block!important;}
+  .campaignSelectScreen .campaignCard .btn {
+    grid-area:btn!important;
+    min-height:28px!important;
+    padding:4px 6px!important;
+    font-size:10px!important;
+  }
 
-  /* Campaign team choose: all three teams visible in one portrait screen. */
-  .campaignSelectScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
-  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:36px!important;padding:max(4px,env(safe-area-inset-top)) 8px 4px!important;}
-  .campaignSelectScreen .title{font-size:16px!important;}
-  .campaignSelectScreen .subtitle{font-size:9px!important;line-height:1.05!important;}
-  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:auto!important;padding:6px!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
-  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:repeat(3,minmax(0,1fr))!important;gap:5px!important;flex:1 1 auto!important;min-height:0!important;}
-  .campaignSelectScreen .campaignCard{height:100%!important;max-height:calc((100dvh - 118px)/3)!important;min-height:0!important;display:grid!important;grid-template-columns:74px minmax(0,1fr)!important;grid-template-rows:auto 1fr auto!important;grid-template-areas:"img title" "img meta" "img btn"!important;gap:2px 7px!important;padding:5px!important;border-radius:12px!important;overflow:hidden!important;}
-  .campaignSelectScreen .starThumb{grid-area:img!important;width:74px!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;border-radius:10px!important;background-size:cover!important;background-position:center 18%!important;}
-  .campaignSelectScreen .campaignTitle{grid-area:title!important;font-size:16px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
-  .campaignSelectScreen .campaignMeta{grid-area:meta!important;font-size:10px!important;line-height:1.12!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .campaignSelectScreen .campaignCard .btn{grid-area:btn!important;min-height:24px!important;padding:3px 5px!important;font-size:10px!important;border-radius:7px!important;box-shadow:0 2px 0 #9a6b07!important;}
-  .campaignSelectScreen .footerBtns{flex:0 0 auto!important;margin:2px 0 0!important;}
-  .campaignSelectScreen .footerBtns .btn{min-height:24px!important;padding:3px 8px!important;font-size:9px!important;}
-
-  /* Tutorial intro on portrait: center box first, then both captains side by side. */
-  .tutorialPrompt .cineCard{width:min(96vw,720px)!important;max-height:94vh!important;padding:12px!important;}
-  .tutorialIntroCaptain{height:140px!important;min-height:140px!important;}
-
-  /* Tutorial gameplay: hide the long legend under the field and keep next visible. */
-  .tutorialScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;}
-  .tutorialScreen .topbar{flex:0 0 auto!important;padding:max(4px,env(safe-area-inset-top)) 8px 4px!important;min-height:32px!important;}
-  .tutorialScreen .title{font-size:13px!important;letter-spacing:.04em!important;}
-  .tutorialScreen .subtitle{font-size:8px!important;line-height:1.05!important;max-width:48vw!important;overflow:hidden!important;}
-  .tutorialScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:4px!important;}
-  .tutorialLayout{height:100%!important;display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;grid-template-columns:1fr!important;gap:4px!important;overflow:hidden!important;}
-  .tutorialCoach{min-height:0!important;padding:5px!important;display:block!important;overflow:hidden!important;border-radius:10px!important;}
-  .tutorialCoach > div:first-child{display:grid!important;grid-template-columns:72px minmax(0,1fr)!important;grid-template-areas:"portrait name" "portrait title" "portrait text" "speech speech"!important;column-gap:8px!important;row-gap:2px!important;align-items:start!important;}
-  .tutorialCoach .tutorialPortrait{grid-area:portrait!important;height:80px!important;width:72px!important;aspect-ratio:auto!important;margin:0!important;border-radius:10px!important;border-width:2px!important;display:block!important;}
-  .tutorialCoach .tutorialName{grid-area:name!important;order:0!important;font-size:8px!important;line-height:1!important;margin:0!important;}
-  .tutorialCoach .tutorialTitle{grid-area:title!important;order:0!important;font-size:15px!important;line-height:1!important;margin:0!important;}
-  .tutorialCoach .tutorialText{grid-area:text!important;font-size:12px!important;line-height:1.12!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;margin:0!important;}
-  .tutorialSpeechBox{grid-area:speech!important;margin-top:4px!important;padding:6px 8px!important;font-size:11px!important;line-height:1.15!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .tutorialCoach .tutorialStepNote,.tutorialCoach > .tutorialBottom{display:none!important;}
-  .tutorialDemo{min-height:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
-  .tutorialDemo .scoreCard{flex:0 0 auto!important;padding:4px!important;border-radius:9px!important;}
-  .tutorialDemo .playPanel{display:grid!important;grid-template-columns:1fr 1fr!important;gap:4px!important;margin:0 0 3px!important;}
-  .tutorialDemo .playBox{padding:3px 5px!important;border-radius:7px!important;}
-  .tutorialDemo .playLabel{font-size:7px!important;margin:0!important;}
-  .tutorialDemo .playText{font-size:10px!important;line-height:1.05!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .tutorialDemo .field{height:106px!important;min-height:0!important;border-width:2px!important;}
+  /* Tutorial: save space and prevent the green feedback from pushing Next down. */
+  .tutorialResult{display:none!important;}
   .tutorialDemo .miniLegend{display:none!important;}
-  .tutorialDemo .matchStatusStrip{font-size:7px!important;gap:2px!important;padding:0!important;line-height:1!important;}
-  .tutorialDemo .zone{height:12px!important;font-size:6px!important;padding:0!important;border-radius:4px!important;}
-  .tutorialMockControls{flex:0 0 auto!important;padding:4px!important;border-radius:9px!important;}
-  .tutorialMockControls .row{gap:4px!important;}
-  .tutorialMockControls .row b{font-size:10px!important;line-height:1!important;}
-  .tutorialMockControls .pill,.tutorialLockedHint{font-size:7px!important;padding:1px 4px!important;margin:0!important;}
-  .tutorialMockControls p.small,.tutorialDemo .logDetails{display:none!important;}
-  .tutorialMockControls .choiceGrid,.tutorialMockControls .penGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{gap:4px!important;}
-  .tutorialMockControls .choiceGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{grid-template-columns:repeat(3,1fr)!important;}
-  .tutorialMockControls .btn{min-height:30px!important;padding:4px 5px!important;font-size:9px!important;border-radius:7px!important;box-shadow:0 3px 0 #082b50!important;}
-  .tutorialMockControls .moveName{font-size:10px!important;}
+  .tutorialMockControls p.small,
   .tutorialMockControls .moveDesc{display:none!important;}
-  .tutorialDemo > .tutorialBottom{flex:0 0 auto!important;margin:0!important;gap:4px!important;display:flex!important;position:relative!important;z-index:2!important;background:#020814!important;padding-top:2px!important;}
-  .tutorialDemo > .tutorialBottom .btn{min-height:30px!important;padding:4px 6px!important;font-size:10px!important;border-radius:8px!important;}
 }
 
-@media (max-height:520px) and (orientation:landscape){
-  html,body{height:auto!important;min-height:100dvh!important;overflow-y:auto!important;overflow-x:hidden!important;}
-  #app{height:auto!important;min-height:100dvh!important;overflow:visible!important;}
+/* Phone landscape only. Do not affect desktop/laptop. */
+@media (max-width:950px) and (max-height:520px) and (orientation:landscape){
+  html, body {
+    height:auto!important;
+    min-height:100dvh!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  #app {
+    height:auto!important;
+    min-height:100dvh!important;
+    overflow:visible!important;
+  }
 
-  /* Landscape splash/home: show whole poster with a compact tap bar. */
-  .splashScreen,
-  .homeScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;overflow:hidden!important;}
-  .splashScreen .startLogoImg,
-  .homeScreen .startLogoImg{inset:max(4px,env(safe-area-inset-top)) 0 46px 0!important;width:100%!important;height:calc(100dvh - 52px)!important;object-fit:contain!important;object-position:center center!important;background:#020814!important;}
-  .splashScreen .startShade,
-  .homeScreen .startShade{background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08) 55%,rgba(0,0,0,.45))!important;}
-  .splashScreen .splashTap{left:15%!important;right:15%!important;bottom:4px!important;transform:none!important;width:auto!important;min-width:0!important;padding:7px 10px!important;font-size:10px!important;border-radius:14px!important;}
-  .homeButtonBar{left:50%!important;right:auto!important;transform:translateX(-50%)!important;bottom:5px!important;width:min(520px,90vw)!important;grid-template-columns:1fr 1fr!important;gap:6px!important;padding:6px!important;border-radius:14px!important;}
-  .homeButtonBar .btn{min-height:32px!important;font-size:11px!important;}
-  .homeMiniHint{display:none!important;}
+  .campaignSelectScreen {
+    height:auto!important;
+    min-height:100dvh!important;
+    overflow:visible!important;
+  }
+  .campaignSelectScreen .content {
+    overflow-y:auto!important;
+    -webkit-overflow-scrolling:touch!important;
+  }
+  .campaignSelectScreen .campaignGrid {
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    height:auto!important;
+  }
+  .campaignSelectScreen .campaignCard {
+    display:flex!important;
+    flex-direction:column!important;
+    gap:3px!important;
+    padding:5px!important;
+    min-height:0!important;
+  }
+  .campaignSelectScreen .starThumb {
+    height:82px!important;
+    aspect-ratio:auto!important;
+    margin:0!important;
+    background-size:cover!important;
+    background-position:center 18%!important;
+  }
+  .campaignSelectScreen .campaignTitle{font-size:12px!important;line-height:1!important;margin:0!important;}
+  .campaignSelectScreen .campaignMeta{font-size:8px!important;line-height:1.08!important;margin:0!important;}
+  .campaignSelectScreen .campaignCard .btn{min-height:24px!important;font-size:8px!important;padding:3px 5px!important;}
 
-  /* Landscape tutorial prompt: center panel on top, captains below, no cropped strips. */
-  .tutorialPrompt .cineCard{width:min(96vw,960px)!important;max-height:95vh!important;overflow:auto!important;padding:10px!important;}
-  .tutorialIntroGrid{grid-template-columns:1fr 1fr!important;grid-template-areas:"center center" "pt ar"!important;gap:8px!important;}
-  .tutorialIntroCenter{padding:10px!important;gap:8px!important;}
-  .tutorialIntroCaptain{height:118px!important;min-height:118px!important;background-position:center 18%!important;}
-  .tutorialIntroCaptainLabel{font-size:11px!important;padding:5px!important;}
-  .tutorialIntroCenter .tutorialText{font-size:12px!important;line-height:1.2!important;}
-  .tutorialIntroCenter .btn{min-height:34px!important;font-size:11px!important;}
-
-  /* Campaign team choose: all three visible in one landscape view. */
-  .campaignSelectScreen{width:100vw!important;min-height:100dvh!important;border:0!important;border-radius:0!important;display:flex!important;flex-direction:column!important;}
-  .campaignSelectScreen .topbar{flex:0 0 auto!important;min-height:28px!important;padding:max(3px,env(safe-area-inset-top)) 8px 3px!important;}
-  .campaignSelectScreen .title{font-size:14px!important;}
-  .campaignSelectScreen .subtitle{font-size:8px!important;line-height:1!important;}
-  .campaignSelectScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:auto!important;padding:4px!important;display:flex!important;flex-direction:column!important;gap:4px!important;}
-  .campaignSelectScreen .campaignGrid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px!important;flex:1 1 auto!important;min-height:0!important;}
-  .campaignSelectScreen .campaignCard{display:flex!important;flex-direction:column!important;gap:3px!important;padding:5px!important;border-radius:10px!important;overflow:hidden!important;min-height:0!important;}
-  .campaignSelectScreen .starThumb{height:84px!important;aspect-ratio:auto!important;margin:0!important;border-radius:8px!important;background-size:cover!important;background-position:center 18%!important;flex:0 0 auto!important;}
-  .campaignSelectScreen .campaignTitle{font-size:13px!important;line-height:1!important;margin:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
-  .campaignSelectScreen .campaignMeta{font-size:8px!important;line-height:1.08!important;margin:0!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .campaignSelectScreen .campaignCard .btn{min-height:24px!important;padding:3px 5px!important;font-size:8px!important;border-radius:7px!important;box-shadow:0 2px 0 #9a6b07!important;}
-  .campaignSelectScreen .footerBtns{margin:1px 0 0!important;}
-  .campaignSelectScreen .footerBtns .btn{min-height:22px!important;padding:3px 8px!important;font-size:8px!important;}
-
-  /* Tutorial gameplay in landscape: compact coach column + field/actions visible together. */
-  .tutorialScreen{width:100vw!important;height:100dvh!important;min-height:100dvh!important;border:0!important;border-radius:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;}
-  .tutorialScreen .topbar{flex:0 0 auto!important;min-height:28px!important;padding:max(3px,env(safe-area-inset-top)) 7px 3px!important;}
-  .tutorialScreen .title{font-size:12px!important;}
-  .tutorialScreen .subtitle{font-size:8px!important;line-height:1!important;}
-  .tutorialScreen .content{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important;padding:4px!important;}
-  .tutorialLayout{height:100%!important;display:grid!important;grid-template-columns:32vw minmax(0,1fr)!important;gap:4px!important;overflow:hidden!important;}
-  .tutorialCoach{min-height:0!important;padding:5px!important;overflow:hidden!important;border-radius:10px!important;}
-  .tutorialCoach > div:first-child{display:grid!important;grid-template-columns:58px minmax(0,1fr)!important;grid-template-areas:"portrait name" "portrait title" "text text" "speech speech"!important;column-gap:7px!important;row-gap:2px!important;align-items:start!important;}
-  .tutorialCoach .tutorialPortrait{grid-area:portrait!important;height:62px!important;width:58px!important;aspect-ratio:auto!important;margin:0!important;border-radius:8px!important;border-width:2px!important;display:block!important;}
-  .tutorialName{font-size:8px!important;line-height:1!important;}
-  .tutorialTitle{font-size:13px!important;line-height:1!important;margin:0 0 2px!important;}
-  .tutorialText{grid-area:text!important;font-size:10px!important;line-height:1.12!important;display:-webkit-box!important;-webkit-line-clamp:3!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .tutorialSpeechBox{grid-area:speech!important;margin-top:3px!important;padding:4px 6px!important;font-size:9px!important;line-height:1.08!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .tutorialCoach .tutorialStepNote,.tutorialCoach > .tutorialBottom{display:none!important;}
-  .tutorialDemo{min-height:0!important;overflow:hidden!important;gap:4px!important;display:flex!important;flex-direction:column!important;}
-  .tutorialDemo .scoreCard{padding:4px!important;border-radius:9px!important;}
-  .tutorialDemo .playPanel{grid-template-columns:1fr 1fr!important;gap:4px!important;margin-bottom:3px!important;}
-  .tutorialDemo .playBox{padding:3px 5px!important;}
-  .tutorialDemo .playLabel{font-size:7px!important;}
-  .tutorialDemo .playText{font-size:9px!important;line-height:1.05!important;-webkit-line-clamp:2!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
-  .tutorialDemo .field{height:84px!important;min-height:0!important;}
+  .tutorialResult{display:none!important;}
   .tutorialDemo .miniLegend{display:none!important;}
-  .tutorialDemo .matchStatusStrip{font-size:7px!important;}
-  .tutorialDemo .compactZones{display:flex!important;}
-  .tutorialMockControls{padding:4px!important;border-radius:9px!important;}
-  .tutorialMockControls p.small,.tutorialMockControls .moveDesc,.tutorialDemo .logDetails{display:none!important;}
-  .tutorialMockControls .choiceGrid,.tutorialMockControls .penGrid,.tutorialMockControls .defenseGrid,.tutorialPenaltyGrid{grid-template-columns:repeat(3,1fr)!important;gap:4px!important;}
-  .tutorialMockControls .btn{min-height:28px!important;font-size:9px!important;padding:3px 5px!important;border-radius:7px!important;}
-  .tutorialMockControls .moveName{font-size:9px!important;}
-  .tutorialDemo > .tutorialBottom{margin:0!important;gap:4px!important;display:flex!important;background:#020814!important;padding-top:2px!important;}
-  .tutorialDemo > .tutorialBottom .btn{min-height:26px!important;padding:3px 6px!important;font-size:9px!important;}
+
+  .tutorialIntroGrid {
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  .tutorialIntroCenter {
+    grid-column:1/-1!important;
+    order:-1!important;
+  }
+  .tutorialIntroCaptain {
+    min-height:120px!important;
+    height:120px!important;
+    background-position:center 18%!important;
+  }
+}
+
+/* Desktop/laptop: keep campaign select as full captain cards, not cropped strips. */
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .campaignSelectScreen .campaignGrid{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(230px,1fr))!important;
+    gap:14px!important;
+  }
+  .campaignSelectScreen .campaignCard{
+    display:block!important;
+    padding:14px!important;
+    min-height:auto!important;
+    max-height:none!important;
+  }
+  .campaignSelectScreen .starThumb{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:3/4!important;
+    max-height:min(58vh,440px)!important;
+    margin-bottom:10px!important;
+    background-size:cover!important;
+    background-position:center top!important;
+  }
 }
 
 </style>
@@ -1638,13 +1627,13 @@ const ASSETS = {
 const ZONES = ['Own Third','Own Half','Midfield','Attacking Third','Danger Zone'];
 const MATCH_TURNS = 18;
 const teams = {
-  P: {name:'Portugal', short:'Portugal', flag:'🇵🇹', color:'red', normalShot:'Power Shot', special:'Meteor Strike', stats:{game:77, shot:80, power:88, setup:77, special:88}},
-  A: {name:'Argentina', short:'Argentina', flag:'🇦🇷', color:'blue', normalShot:'Placed Strike', special:'Maestro Curve', stats:{game:88, shot:91, power:84, setup:94, special:97}},
+    P: {name:'Portugal', short:'Portugal', flag:'🇵🇹', color:'red', normalShot:'Power Shot', special:'Meteor Strike', stats:{game:76, shot:79, power:87, setup:76, special:87}},
+  A: {name:'Argentina', short:'Argentina', flag:'🇦🇷', color:'blue', normalShot:'Placed Strike', special:'Maestro Curve', stats:{game:89, shot:92, power:85, setup:95, special:98}},
 };
 
 const TEAM_LIBRARY = {
-  portugal:{name:'Portugal', flag:'🇵🇹', star:ASSETS.starPt, flagImg:ASSETS.flagPt, goalImg:ASSETS.goalPt, specialImg:ASSETS.specialPt, winImg:ASSETS.winPt, normalShot:'Power Shot', special:'Meteor Strike', style:'Power / Captain Finish', tier:90, stats:{game:79, shot:80, power:88, setup:77, special:88}},
-  argentina:{name:'Argentina', flag:'🇦🇷', star:ASSETS.starAr, flagImg:ASSETS.flagAr, goalImg:ASSETS.goalAr, specialImg:ASSETS.specialAr, winImg:ASSETS.winAr, normalShot:'Placed Strike', special:'Maestro Curve', style:'Technique / Calm Finish', tier:93, stats:{game:88, shot:91, power:84, setup:94, special:97}},
+  portugal:{name:'Portugal', flag:'🇵🇹', star:ASSETS.starPt, flagImg:ASSETS.flagPt, goalImg:ASSETS.goalPt, specialImg:ASSETS.specialPt, winImg:ASSETS.winPt, normalShot:'Power Shot', special:'Meteor Strike', style:'Power / Captain Finish', tier:89, stats:{game:78, shot:79, power:87, setup:76, special:87}},
+  argentina:{name:'Argentina', flag:'🇦🇷', star:ASSETS.starAr, flagImg:ASSETS.flagAr, goalImg:ASSETS.goalAr, specialImg:ASSETS.specialAr, winImg:ASSETS.winAr, normalShot:'Placed Strike', special:'Maestro Curve', style:'Technique / Calm Finish', tier:94, stats:{game:89, shot:92, power:85, setup:95, special:98}},
   brazil:{name:'Brazil', flag:'🇧🇷', star:ASSETS.starBra, flagImg:ASSETS.flagBra, goalImg:ASSETS.goalBra, specialImg:ASSETS.specialBra, winImg:ASSETS.winBra, normalShot:'Golden Shot', special:'Golden Strike', style:'Brilliant / Emotional', tier:94, stats:{game:87, shot:88, power:86, setup:89, special:94}},
   france:{name:'France', flag:'🇫🇷', star:ASSETS.starFra, flagImg:ASSETS.flagFra, normalShot:'Burst Shot', special:'Lightning Run', style:'Speed / Clinical', tier:92, stats:{game:86, shot:88, power:87, setup:84, special:92}},
   england:{name:'England', flag:'🏴', star:ASSETS.starEng, flagImg:ASSETS.flagEng, normalShot:'Captain Strike', special:'Calm Finish', style:'Composed / Striker', tier:88, stats:{game:84, shot:87, power:86, setup:82, special:88}},
